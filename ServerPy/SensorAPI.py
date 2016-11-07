@@ -1,5 +1,10 @@
 import UserAPI
+import sqlite3
+import json
+from flask import Flask
+from flask import request
 
+app = Flask(__name__)
 
 class Sensor(object):
     def __init__(self, j):

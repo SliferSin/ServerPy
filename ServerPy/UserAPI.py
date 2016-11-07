@@ -12,8 +12,7 @@ class User(object):
         self.name = j['Name']
         self.lastname = j['LastName']
         self.edat = j['Edat']
-        self.sexe = j['Sexe']
-        #self.__dict__=json.loads(j)
+        self.sexe = j['Sexe']        
 
 #Estructura per eliminar usuari
 class DelUser(object):
