@@ -1,30 +1,15 @@
 import UserAPI
 import sqlite3
 import json
+import DBClass
 from flask import Flask
 from flask import request
-
-app = Flask(__name__)
 from datetime import datetime
 
 
-#Estructura per afegir les dades
-class Dades(object):
-    def __init__(self, j):
-        self.Data = j['Data']
-        self.ID_Sensor = j['ID_Sensor']        
-        self.X = j['X']
-        self.Y = j['Y']
-        self.Z = j['Z']
-
-#Estructura per eliminar a partir del sensor
-class DelDades(object):
-    def __init__(self, j):
-        self.ID_Usuari = j['ID_Usuari']
-        self.Data = j['Data']
-        
-        
-@app.route("Dades/Add/", methods = ['POST']) #Afegir fila
+app = Flask(__name__)
+       
+@app.route("/Dades/Add/", methods = ['POST']) #Afegir fila
 def Add(): 
     conn = sqlite3.connect('IS.db')
     c = conn.cursor()
@@ -38,7 +23,7 @@ def Add():
     conn.close()    
     return "Entrada insertada"
 
-@app.route("Dades/Del/", methods = ['DELETE'])
+@app.route("/Dades/Del/", methods = ['DELETE'])
 def Del():
     conn = sqlite3.connect('IS.db')
     c = conn.cursor()

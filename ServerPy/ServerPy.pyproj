@@ -25,7 +25,13 @@
     <Compile Include="DadesAPI.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DBClass.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SensorAPI.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ServerRun.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="UserAPI.py" />
