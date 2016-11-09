@@ -12,7 +12,7 @@ class Dades(object):
         self.X = j['X']
         self.Y = j['Y']
         self.Z = j['Z']
-
+    
 #Estructura per eliminar a partir del sensor
 class DelDades(object):
     def __init__(self, j):
