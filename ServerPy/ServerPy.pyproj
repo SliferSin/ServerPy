@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>95ee4df9-212e-4795-8c80-25bb95d36f9e</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>UserAPI.py</StartupFile>
+    <StartupFile>runserver.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,19 +22,23 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="DadesAPI.py">
+    <Compile Include="ServerPy\Views\DadesAPI.py" />
+    <Compile Include="DBClass.py" />
+    <Compile Include="ServerPy\Views\SensorAPI.py" />
+    <Compile Include="runserver.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DBClass.py">
+    <Compile Include="ServerPy\Views\UserAPI.py" />
+    <Compile Include="ServerPy\Views\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SensorAPI.py">
+    <Compile Include="ServerPy\__init__.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ServerRun.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="UserAPI.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ServerPy\" />
+    <Folder Include="ServerPy\Views\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

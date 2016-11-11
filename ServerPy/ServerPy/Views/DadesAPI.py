@@ -1,16 +1,13 @@
-import UserAPI
+import ServerPy.Views.UserAPI
 import sqlite3
 import json
 import DBClass
-from flask import Flask
-from flask import request
+from ServerPy import app 
+from flask import Flask,request
 from datetime import datetime
-
-
-app = Flask(__name__)
        
 @app.route("/Dades/Add/", methods = ['POST']) #Afegir fila
-def Add(): 
+def AddDades(): 
     conn = sqlite3.connect('IS.db')
     c = conn.cursor()
    
@@ -24,7 +21,7 @@ def Add():
     return "Entrada insertada"
 
 @app.route("/Dades/Del/", methods = ['DELETE'])
-def Del():
+def DelDades():
     conn = sqlite3.connect('IS.db')
     c = conn.cursor()
    

@@ -1,15 +1,13 @@
-import UserAPI
+import ServerPy.Views.UserAPI
 import sqlite3
 import json
 import DBClass
-from flask import Flask
-from flask import request
-
-app = Flask(__name__)
+from ServerPy import app 
+from flask import Flask,request
 
 #Eliminar sensor
 @app.route("/Sensor/Del", methods = ['DELETE'])
-def Del():
+def DelSensor():
     conn = sqlite3.connect('IS.db')
     c = conn.cursor()
    
