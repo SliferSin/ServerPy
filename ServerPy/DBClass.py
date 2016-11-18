@@ -6,7 +6,6 @@ from flask import Response
 ###  DADES ###
 ###        ###
 ##############
-
 #Estructura per afegir les dades
 class Dades(object):
     def __init__(self, j):
@@ -27,7 +26,6 @@ class DelDades(object):
 ###  SENSOR ###
 ###         ###
 ###############
-
 class Sensor(object):
     def __init__(self, j):
         self.ID = j['ID']
@@ -40,7 +38,6 @@ class Sensor(object):
 ###  USUARI ###
 ###         ###
 ###############
-
 #Estructura per afegir usuari
 class User(object):
     def __init__(self, j):
@@ -56,7 +53,7 @@ class DelUser(object):
         self.DNI = j['DNI']
 
 #Estructura per obtenir dades mitjançant un DNI
-#Metode Send per retornar la informació en format JSON
+
 class GetUser(object):
     def __init__(self, j):
         self.DNI = j[0]
@@ -68,7 +65,8 @@ class GetUser(object):
         self.z = j[6]
         self.data = j[7]
         self.ID_Sensor = j[8]
-    
+
+#Metode Send per retornar la informació en format JSON    
     def Send(self):
         data = {
             "DNI": self.DNI,
