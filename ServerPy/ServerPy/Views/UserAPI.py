@@ -1,7 +1,7 @@
 import sqlite3
 import json
 import DBClass
-from flask import Flask, Blueprint,request,Response
+from flask import Flask,request,Response
 from ServerPy import app 
 
 @app.route("/User/Add", methods = ['POST']) #Afegir fila
@@ -50,123 +50,10 @@ def GetUser():
             c.execute("SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.X,d.Y,d.Z,d.data,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ?",[uDNI])
             info_usuari = c.fetchone()
             info = DBClass.GetUser(info_usuari)
-            resp = info.Send()
-            
+            resp = info.Send()            
         
     except sqlite3.Error as e:
         print("Error:",e.args[0])
     
     conn.close()
     return resp
-           
-
-        
-    
-
-
-
-
-
-#################
-### API SENSOR ##
-#################
-#@app.route("/Sensor/Add", methods = ['POST']) #Afegir fila
-#def AddSensor(): 
-#    conn = sqlite3.connect('IS.db')
-#    c = conn.cursor()
-    
-#    try:   
-#        if request.headers['Content-Type'] == 'application/json':
-#            sens = request.json
-#            #s = Sensor(sens)
-#            s = DBClass.Sensor(sens)           
-#            c.execute("INSERT INTO Sensor VALUES (?,?,?)",[s.ID,s.ID_Propietari,s.ID_Usuari])
-#            conn.commit()    
-
-#    except sqlite3.Error as e:
-#        print("Error:",e.args[0])
-
-#    conn.close()    
-#    return "Fila insertada"
-
-#@app.route("/Sensor/Del", methods = ['DELETE']) #Elimina el Sensor
-#def DelSensor():
-#    conn = sqlite3.connect('IS.db')
-#    c = conn.cursor()
-#    try:
-#        if request.headers['Content-Type'] == 'application/json':
-#            sens = request.json
-#            s = DBClass.Sensor(sens)        
-#            c.execute("DELETE FROM Sensor WHERE ID = ?",[s.ID])
-#            conn.commit()    
-#    except sqlite3.Error as e:
-#        print("Error:",e.args[0])
-
-#    conn.close()    
-#    return "Fila eliminada"
-
-##Canviar ID_USUARI
-#@app.route("/Sensor/Update",methods = ['PUT'])
-#def UpdateUsuari():
-#    conn = sqlite3.connect('IS.db')
-#    c = conn.cursor()
-#    try:
-#        if request.headers['Content-Type'] == 'application/json':
-#            sens = request.json
-#            s = DBClass.Sensor(sens)        
-#            print(s.ID)
-#            c.execute("UPDATE Sensor SET ID_Usuari = ? WHERE ID = ?",[s.ID_Usuari,s.ID])
-#            conn.commit()    
-#    except sqlite3.Error as e:
-#        print("Error:",e.args[0])
-
-#    conn.close()    
-#    return "200"
-
-################
-### API DADES ##
-################
-       
-#@app.route("/Dades/Add/", methods = ['POST']) #Afegir fila
-#def AddDades(): 
-#    conn = sqlite3.connect('IS.db')
-#    c = conn.cursor()
-    
-#    try:   
-#        if request.headers['Content-Type'] == 'application/json':
-#            data = request.json
-#            d = DBClass.Dades(data)
-#            c.execute("INSERT INTO Dades VALUES (?,?,?,?,?)",[d.ID_Sensor,d.Data,d.X,d.Y,d.Z])
-#            conn.commit()    
-
-#    except sqlite3.Error as e:
-#        print("Error:",e.args[0])
-
-#    conn.close()    
-#    return "Entrada insertada"
-
-#@app.route("/Dades/Del/", methods = ['DELETE']) #Eliminar fila
-#def DelDades():
-#    conn = sqlite3.connect('IS.db')
-#    c = conn.cursor()
-
-#    try:   
-#        if request.headers['Content-Type'] == 'application/json':
-#            data = request.json
-#            d = DBClass.DelDades(data)
-
-#            c.execute("SELECT ID FROM Sensor WHERE Id_Usuari = ?",[d.ID_Usuari])
-#            ID_Sensor = c.fetchone()
-
-#            #Arreglar fecha para que sea s?lo del dia
-#            #c.execute("DELETE FROM Dades WHERE ID_Sensor = ? AND Data BETWEEN ? AND ? ",[ID_Sensor, d.Data,])
-#            conn.commit()    
-
-#    except sqlite3.Error as e:
-#        print("Error:",e.args[0])
-
-#    conn.close()    
-#    return "Entrada eliminada"
-
-#if __name__ == "__main__":   
-#    app.run(host='localhost', port='155')

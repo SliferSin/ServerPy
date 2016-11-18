@@ -1,3 +1,6 @@
+import json
+from flask import Response
+
 ##############
 ###        ###
 ###  DADES ###
@@ -52,6 +55,8 @@ class DelUser(object):
     def __init__(self,j):
         self.DNI = j['DNI']
 
+#Estructura per obtenir dades mitjançant un DNI
+#Metode Send per retornar la informació en format JSON
 class GetUser(object):
     def __init__(self, j):
         self.DNI = j[0]
