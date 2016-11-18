@@ -44,11 +44,39 @@ class User(object):
         self.DNI = j['DNI']
         self.name = j['Name']
         self.lastname = j['LastName']
-        self.edat = j['Edat']
-        self.sexe = j['Sexe']        
+        self.age = j['Age']
+        self.gender = j['Gender']        
 
 #Estructura per eliminar usuari
 class DelUser(object):
     def __init__(self,j):
         self.DNI = j['DNI']
+
+class GetUser(object):
+    def __init__(self, j):
+        self.DNI = j[0]
+        self.name = j[1]
+        self.lastname = j[2]
+        self.age = j[3]
+        self.x = j[4]
+        self.y = j[5]
+        self.z = j[6]
+        self.data = j[7]
+        self.ID_Sensor = j[8]
+    
+    def Send(self):
+        data = {
+            "DNI": self.DNI,
+            "Name": self.name,
+            "LastName": self.lastname,
+            "Age":self.age,
+            "X":self.x,
+            "Y":self.y,
+            "Z":self.z,
+            "Data":self.data,
+            "ID_Sensor":self.ID_Sensor        
+        }
+        js = json.dumps(data)
+        resp = Response(js,status=200, mimetype='application/json')    
+        return resp
 
