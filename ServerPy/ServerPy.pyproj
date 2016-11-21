@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ServerPy\Login.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ServerPy\Views\DadesAPI.py" />
     <Compile Include="DBClass.py" />
     <Compile Include="ServerPy\Views\SensorAPI.py" />
