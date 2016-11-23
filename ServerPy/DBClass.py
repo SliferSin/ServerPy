@@ -1,4 +1,5 @@
 import json
+import sqlite3
 from flask import Response
 
 ##############
@@ -89,5 +90,21 @@ class LogUser(object):
         self.password = password
 
     def VerifyLogin(self):
+        conn = sqlite3.connect('IS.db')
+        c = conn.cursor()
+        try:
+            c.execute("SELECT name FROM Usuari WHERE password = ?",[self.password])
+            conn.commit()    
+            nameDB = c.fethone()
+        except sqlite3.Error as e:
+            print("Error: ",e.args[0])
+        
+        conn.close()
+
+        if nameDB == self.name:
+                return True
+        else: 
+                return False
+
         
         

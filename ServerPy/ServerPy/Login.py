@@ -10,7 +10,7 @@ def Login():
         password = request.args.get('password')
         loguser = DBClass.LogUser(username,password)
         try:
-            if loguser.VerifyLogin(): #Hacer función que compruebe que es correcta la relación user-pass
+            if loguser.VerifyLogin(): 
                 session['username'] = username
 
      else : #Registrar usuario
