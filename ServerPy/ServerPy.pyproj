@@ -25,6 +25,9 @@
     <Compile Include="ServerPy\Login.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ServerPy\Templates\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ServerPy\Views\DadesAPI.py" />
     <Compile Include="DBClass.py" />
     <Compile Include="ServerPy\Views\SensorAPI.py" />
@@ -41,7 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ServerPy\" />
+    <Folder Include="ServerPy\Templates\" />
     <Folder Include="ServerPy\Views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ServerPy\Templates\layout.html" />
+    <Content Include="ServerPy\Templates\log.html" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
