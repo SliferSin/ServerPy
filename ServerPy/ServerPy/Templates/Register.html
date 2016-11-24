@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Afegir usuari</title>
+
+    <script type="text/javascript">
+        function afegirUser() {            
+            $.getJSON("http://localhost:155").done( function(datos){ 
+                $("#Nom").text(datos.name);
+                $("#Cognom").text(datos.lastname);
+                $("#DNI").text(datos.DNI);
+                $("#Edat").text(datos.age);
+                $("#Sexe").text(datos.gender);
+                $("#Password").text(datos.password);
+            });
+        }
+        </script>
+</head><body onload="mostrarUser();">
+	<div>
+		<h2>DNI: <span id="DNI"></span></h2>		
+	</div>
+</body
+</html>

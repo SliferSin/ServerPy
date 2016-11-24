@@ -33,7 +33,6 @@ class Sensor(object):
         self.ID_Propietari = j['ID_Propietari']
         self.ID_Usuari = j['ID_Usuari']
 
-
 ###############
 ###         ###
 ###  USUARI ###

@@ -5,7 +5,7 @@ from ServerPy import app
 
 #localhost:155/login?username="loquesea"&password="loquesea"
 @app.route("/login", methods = ['GET','POST']) #Login or Register
-def Login():
+def Login():     
      if request.method == 'GET':
         username = request.args.get('username')
         password = request.args.get('password')
@@ -27,8 +27,8 @@ def logout():
    return redirect(url_for('index'))
 
 @app.route('/register')
-def Register():
-    return redirect(url_for('/Login'))
+def Register():    
+    return render_template('Register.html')
 
 @app.route('/')
 @app.route('/index')
