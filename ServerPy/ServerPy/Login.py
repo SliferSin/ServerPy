@@ -18,9 +18,7 @@ def Login():
         else:           
             return "Registrat com " + username + "<br>"
 
-     else : #Registrar usuario    
-        username = request.form['Name']        
-        print(username)
+     else : #Registrar usuario            
         return redirect(url_for('Register'))        
         
 @app.route('/logout')

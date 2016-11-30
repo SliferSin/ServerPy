@@ -18,7 +18,9 @@
         }
        
         function SendValor() {
-            document.getElementById("fmrRegister").submit();
+            //document.getElementById("fmrRegister").submit();
+            var data = JSON.stringify($("#fmrRegister").serializeArray());
+            
         }
         </script>
 </head>
@@ -36,7 +38,7 @@
             <dt>Sexe:</dt>
             <dd><input id="Gender" type="text" /></dd>
             <dt>Password:</dt>
-            <dd><input id="Password" type="text" /></dd>
+            <dd><input id="Password" type="password" /></dd>
             <dd><input type="submit" onclick ="SendValor()" value="Submit"/></dd>
 	    </dl>  
         </form> 
