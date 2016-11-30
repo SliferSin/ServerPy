@@ -16,10 +16,29 @@
                 $("#Password").text(datos.password);
             });
         }
+       
+        function SendValor() {
+            document.getElementById("fmrRegister").submit();
+        }
         </script>
-</head><body onload="mostrarUser();">
-	<div>
-		<h2>DNI: <span id="DNI"></span></h2>		
-	</div>
-</body
+</head>
+    <body>
+        <form id =" fmrRegister" action="{{ url_for('AddUser') }}" method="post">
+	    <dl>
+            <dt>Nom:</dt> 
+            <dd><input id="Name" type="text" value ="{{username}}" /></dd>            
+            <dt>Cognom:</dt>
+            <dd><input id="LastName" type="text" /></dd>
+            <dt>DNI:</dt>
+            <dd><input id="DNI" type="text" /></dd>
+            <dt>Edat:</dt>
+            <dd><input id="Age" type="text" /></dd>
+            <dt>Sexe:</dt>
+            <dd><input id="Gender" type="text" /></dd>
+            <dt>Password:</dt>
+            <dd><input id="Password" type="text" /></dd>
+            <dd><input type="submit" onclick ="SendValor()" value="Submit"/></dd>
+	    </dl>  
+        </form> 
+</body>
 </html>

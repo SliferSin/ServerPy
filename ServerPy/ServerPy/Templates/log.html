@@ -7,17 +7,22 @@
 </head>
 <body>
 
-    <form action="{{ url_for('Login') }}" method="post">
+    <form id =" fmrEntrada" action="{{ url_for('Login') }}" method="post">
         <dl>
             <dt>Username:</dt>
             <dd><input id="Name" type="text" /></dd>
 
             <dt>Password:</dt>
-            <dd><input id="Password" type="text"/></dd>
-
-             <dd><input type="submit" value="Login"/></dd>
+            <dd><input id="Password" type="password"/></dd>
+            <!--<dd><input type ="submit" value ="Login" /></dd>-->
+             <dd><input type="submit" onclick ="SendValor()" value="Login"/></dd>
         </dl>        
     </form>
+    <script>
+        function SendValor() {
+            document.getElementById("fmrEntrada").submit();    
+        }
+    </script>
 
 </body>
 </html>

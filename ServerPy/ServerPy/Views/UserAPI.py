@@ -4,7 +4,7 @@ import DBClass
 from flask import Flask,request,Response
 from ServerPy import app 
 
-@app.route("/User/Add", methods = ['POST']) #Afegir fila
+@app.route("/User/AddUser", methods = ['POST']) #Afegir fila
 def AddUser(): 
     conn = sqlite3.connect('IS.db')
     c = conn.cursor()

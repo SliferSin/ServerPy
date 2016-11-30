@@ -6,18 +6,21 @@ from ServerPy import app
 #localhost:155/login?username="loquesea"&password="loquesea"
 @app.route("/login", methods = ['GET','POST']) #Login or Register
 def Login():     
-     if request.method == 'GET':
+     if request.method == 'GET': #Probar con request.form
         username = request.args.get('username')
         password = request.args.get('password')
+        
         loguser = DBClass.LogUser(username,password)
         
         if loguser.VerifyLogin(): 
             session['username'] = username
             return redirect(url_for('index'))
-        else:
+        else:           
             return "Registrat com " + username + "<br>"
 
-     else : #Registrar usuario
+     else : #Registrar usuario    
+        username = request.form['Name']        
+        print(username)
         return redirect(url_for('Register'))        
         
 @app.route('/logout')
@@ -27,7 +30,7 @@ def logout():
    return redirect(url_for('index'))
 
 @app.route('/register')
-def Register():    
+def Register():       
     return render_template('Register.html')
 
 @app.route('/')
