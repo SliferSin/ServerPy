@@ -45,6 +45,7 @@ class User(object):
         self.name = j['Name']
         self.lastname = j['LastName']
         self.age = j['Age']
+        self.password = j['Password']
         self.gender = j['Gender']        
 
 #Estructura per eliminar usuari

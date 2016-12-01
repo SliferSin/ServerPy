@@ -12,7 +12,7 @@ def AddUser():
         if request.headers['Content-Type'] == 'application/json':
             usuario = request.json
             u = DBClass.User(usuario)
-            c.execute("INSERT INTO Usuari VALUES (?,?,?,?,?)",[u.DNI,u.name,u.lastname,u.age,u.gender])
+            c.execute("INSERT INTO Usuari VALUES (?,?,?,?,?,?)",[u.DNI,u.name,u.lastname,u.age,u.password,u.gender])
             conn.commit()    
     except sqlite3.Error as e:
         print("Error: ",e.args[0])
@@ -23,7 +23,7 @@ def AddUser():
     }
     js = json.dumps(data)
     resp = Response(js,status=200, mimetype='application/json')    
-    return resp 
+    return resp     
 
 @app.route("/User/Del",methods = ['DELETE']) #Eliminar fila
 def DelUser():

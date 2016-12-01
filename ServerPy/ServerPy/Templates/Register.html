@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <title>Afegir usuari</title>
-
-    <script type="text/javascript">
+    
+    <script>
         function afegirUser() {            
             $.getJSON("http://localhost:155").done( function(datos){ 
                 $("#Nom").text(datos.name);
@@ -16,19 +16,35 @@
                 $("#Password").text(datos.password);
             });
         }
-       
-        function SendValor() {
-            //document.getElementById("fmrRegister").submit();
-            var data = JSON.stringify($("#fmrRegister").serializeArray());
-            
-        }
         </script>
 </head>
     <body>
-        <form id =" fmrRegister" action="{{ url_for('AddUser') }}" method="post">
+        <script>
+            function SendValor() {
+                //document.getElementById("fmrRegister").submit();
+
+                var formToJSON = function formToJSON(elements) {
+                    return [].reduce.call(elements, function (data, element) {
+                        data[element.name] = element.value;                        
+                        return data;
+                    }, {});
+                };
+
+                var handleFormSubmit = function handleFormSubmit(event) {
+                    event.preventDefault();
+                    var data = formToJSON(form.elements);
+                    var dataContainer = document.getElementsByClassName('results__display')[0];
+                    dataContainer.textContent = JSON.stringify(data, null, '  ');
+                    
+                };
+                var form = document.getElementsByClassName('fmrRegister')[0];
+                form.addEventListener('submit', handleFormSubmit);
+            }
+        </script>
+        <form class =" fmrRegister" action="{{ url_for('AddUser') }}" method="post">
 	    <dl>
             <dt>Nom:</dt> 
-            <dd><input id="Name" type="text" value ="{{username}}" /></dd>            
+            <dd><input id="Name" type="text"/></dd>            
             <dt>Cognom:</dt>
             <dd><input id="LastName" type="text" /></dd>
             <dt>DNI:</dt>
@@ -39,7 +55,7 @@
             <dd><input id="Gender" type="text" /></dd>
             <dt>Password:</dt>
             <dd><input id="Password" type="password" /></dd>
-            <dd><input type="submit" onclick ="SendValor()" value="Submit"/></dd>
+            <dd><input type="submit"  value="Submit"/></dd><!--onclick ="SendValor()"-->
 	    </dl>  
         </form> 
 </body>
