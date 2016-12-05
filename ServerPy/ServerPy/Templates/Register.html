@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <title>Afegir usuari</title>
     
-    <script>
-        function afegirUser() {            
+    <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!--function afegirUser() {            
             $.getJSON("http://localhost:155").done( function(datos){ 
                 $("#Nom").text(datos.name);
                 $("#Cognom").text(datos.lastname);
@@ -16,10 +16,34 @@
                 $("#Password").text(datos.password);
             });
         }
-        </script>
+        </script>-->
+    <script>
+        $.fn.serializeObject = function () {
+            var o = {};
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]];
+                    }
+                    o[this.name].push(this.value || '');
+                } else {
+                    o[this.name] = this.value || '';
+                }
+            });
+            return o;
+        };
+
+        $(function () {
+            $('form').submit(function () {
+                $('#result').text(JSON.stringify($('form').serializeObject()));
+                return false;
+            });
+        });
+    </script>
 </head>
     <body>
-        <script>
+        <!--<script>
             function SendValor() {
                 //document.getElementById("fmrRegister").submit();
 
@@ -40,7 +64,7 @@
                 var form = document.getElementsByClassName('fmrRegister')[0];
                 form.addEventListener('submit', handleFormSubmit);
             }
-        </script>
+        </script>-->
         <form class =" fmrRegister" action="{{ url_for('AddUser') }}" method="post">
 	    <dl>
             <dt>Nom:</dt> 
@@ -55,7 +79,7 @@
             <dd><input id="Gender" type="text" /></dd>
             <dt>Password:</dt>
             <dd><input id="Password" type="password" /></dd>
-            <dd><input type="submit"  value="Submit"/></dd><!--onclick ="SendValor()"-->
+            <dd><input id="button" type="submit"  value="Submit"/></dd><!--onclick ="SendValor()"-->
 	    </dl>  
         </form> 
 </body>
