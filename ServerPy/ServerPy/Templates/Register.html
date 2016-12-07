@@ -6,22 +6,30 @@
     <title>Afegir usuari</title>
     
     <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <!--function afegirUser() {            
-            $.getJSON("http://localhost:155").done( function(datos){ 
-                $("#Nom").text(datos.name);
-                $("#Cognom").text(datos.lastname);
-                $("#DNI").text(datos.DNI);
-                $("#Edat").text(datos.age);
-                $("#Sexe").text(datos.gender);
-                $("#Password").text(datos.password);
+        <!--function afegirUser() {-->
+   <!-- <script>
+        $.getJSON("http://localhost:155", function(datos) {
+            var items = [];
+            $.each(data, function (key, val) {
+                items.push("<li id = '" + key + "'>" + val + "</li>");
             });
-        }
-        </script>-->
+            $("<ul/>",{
+                "class":"Nueva-lista", html:items.join( "" )
+            }).appendTo("body");
+        });
+            //    $("#Nom").text(datos.name);
+            //    $("#Cognom").text(datos.lastname);
+            //    $("#DNI").text(datos.DNI);
+            //    $("#Edat").text(datos.age);
+            //    $("#Sexe").text(datos.gender);
+            //    $("#Password").text(datos.password);
+            //});
+    </script>-->
     <script>
-        $.fn.serializeObject = function () {
+        $.fn.serializeObject = function() {
             var o = {};
             var a = this.serializeArray();
-            $.each(a, function () {
+            $.each(a, function() {
                 if (o[this.name] !== undefined) {
                     if (!o[this.name].push) {
                         o[this.name] = [o[this.name]];
@@ -34,38 +42,16 @@
             return o;
         };
 
-        $(function () {
-            $('form').submit(function () {
-                $('#result').text(JSON.stringify($('form').serializeObject()));
+        $(function () { //Hacer que sea un submit en vez de mostrarse en la misma web
+            $(".fmrRegister").submit(function () {                
+                $("#result").text((JSON.stringify($(".fmrRegister").serializeObject())));
                 return false;
             });
         });
     </script>
 </head>
-    <body>
-        <!--<script>
-            function SendValor() {
-                //document.getElementById("fmrRegister").submit();
-
-                var formToJSON = function formToJSON(elements) {
-                    return [].reduce.call(elements, function (data, element) {
-                        data[element.name] = element.value;                        
-                        return data;
-                    }, {});
-                };
-
-                var handleFormSubmit = function handleFormSubmit(event) {
-                    event.preventDefault();
-                    var data = formToJSON(form.elements);
-                    var dataContainer = document.getElementsByClassName('results__display')[0];
-                    dataContainer.textContent = JSON.stringify(data, null, '  ');
-                    
-                };
-                var form = document.getElementsByClassName('fmrRegister')[0];
-                form.addEventListener('submit', handleFormSubmit);
-            }
-        </script>-->
-        <form class =" fmrRegister" action="{{ url_for('AddUser') }}" method="post">
+    <body>        
+       <!-- <form class ="fmrRegister" action="{{ url_for('AddUser') }}" method="post">
 	    <dl>
             <dt>Nom:</dt> 
             <dd><input id="Name" type="text"/></dd>            
@@ -79,8 +65,24 @@
             <dd><input id="Gender" type="text" /></dd>
             <dt>Password:</dt>
             <dd><input id="Password" type="password" /></dd>
-            <dd><input id="button" type="submit"  value="Submit"/></dd><!--onclick ="SendValor()"-->
+            <dd><p><input id="button" type="submit" value ="Submit"/></p></dd><!--onclick ="SendValor()"
 	    </dl>  
-        </form> 
+        </form>
+        <h2>JSON</h2>
+        <pre id="result"></pre> -->        
+        <form class ="fmrRegister" action="{{ url_for('AddUser') }}" method="post">
+        Nom:<input type="text" name="Fname" maxlength="12" size="12"/> <br/>
+        Cognom:<input type="text" name="Lname" maxlength="36" size="12"/> <br/>
+        Gender:<br/>
+        Male:<input type="radio" name="gender" value="Male"/><br/>
+        Female:<input type="radio" name="gender" value="Female"/><br/>
+        DNI:<input type="text" name="DNI" /><br/>
+        Edat:<input type="text" name="Age"/><br/>
+        Password:<input type="password" name="password"/><br/>
+        <p><input type="submit" /></p>
+        </form>
+        <h2>JSON</h2>
+        <pre id="result">
+        </pre>
 </body>
 </html>
