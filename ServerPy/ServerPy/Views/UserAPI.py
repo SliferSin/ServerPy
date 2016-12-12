@@ -7,23 +7,23 @@ from ServerPy import app
 @app.route("/User/AddUser", methods = ['POST']) #Afegir fila
 def AddUser(): 
     conn = sqlite3.connect('IS.db')
-    c = conn.cursor()
-    try:
-        if request.headers['Content-Type'] == 'application/json':
-            usuario = request.json
-            u = DBClass.User(usuario)
-            c.execute("INSERT INTO Usuari VALUES (?,?,?,?,?,?)",[u.DNI,u.name,u.lastname,u.age,u.password,u.gender])
-            conn.commit()    
-    except sqlite3.Error as e:
+    c = conn.cursor()    
+    try:        
+        usuario = request.json                                   
+        u = DBClass.User(usuario)                 
+        c.execute("INSERT INTO Usuari VALUES (?,?,?,?,?,?)",[u.DNI,u.name,u.lastname,u.age,u.password,u.gender])
+        conn.commit()    
+    except sqlite3.Error as e:        
         print("Error: ",e.args[0])
 
     conn.close()
     data = {
                 "DNI":u.DNI
     }
-    js = json.dumps(data)
-    resp = Response(js,status=200, mimetype='application/json')    
-    return resp     
+    #js = json.dumps(data)
+    #resp = Response(js,status=200, mimetype='application/json')    
+    #return resp     
+    return "OK"
 
 @app.route("/User/Del",methods = ['DELETE']) #Eliminar fila
 def DelUser():

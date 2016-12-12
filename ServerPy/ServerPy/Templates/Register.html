@@ -26,62 +26,87 @@
             //});
     </script>-->
     <script>
-        $.fn.serializeObject = function() {
-            var o = {};
-            var a = this.serializeArray();
-            $.each(a, function() {
-                if (o[this.name] !== undefined) {
-                    if (!o[this.name].push) {
-                        o[this.name] = [o[this.name]];
+        $.fn.formToJSON = function () {
+            var objectGraph = {};
+            function add(objectGraph, name, value) {
+                if (name.length == 1) {
+                    //if the array is now one element long, we're done
+                    objectGraph[name[0]] = value;
+                }
+                else {
+                    //else we've still got more than a single element of depth
+                    if (objectGraph[name[0]] == null) {
+                        //create the node if it doesn't yet exist
+                        objectGraph[name[0]] = {};
                     }
-                    o[this.name].push(this.value || '');
-                } else {
-                    o[this.name] = this.value || '';
+                    //recurse, chopping off the first array element
+                    add(objectGraph[name[0]], name.slice(1), value);
+                }
+            };
+            //loop through all of the input/textarea elements of the form
+            //this.find('input, textarea').each(function() {
+            $(this).children('input, textarea').each(function () {
+                //ignore the submit button
+                if ($(this).attr('name') != 'submit') {
+                    //split the dot notated names into arrays and pass along with the value
+                    add(objectGraph, $(this).attr('name').split('.'), $(this).val());
                 }
             });
-            return o;
+            return JSON.stringify(objectGraph);
         };
+        //$.fn.serializeObject = function() {
+        //    var o = {};
+        //    var a = this.serializeArray();
+        //    $.each(a, function() {
+        //        if (o[this.name] !== undefined) {
+        //            if (!o[this.name].push) {
+        //                o[this.name] = [o[this.name]];
+        //            }
+        //            o[this.name].push(this.value || '');
+        //        } else {
+        //            o[this.name] = this.value || '';
+        //        }
+        //    });
+        //    return o;
+        //};
+        $.ajaxSetup({
+            contentType: "application/json;charset=utf-8",
+            dataType: "json"
+        });
+        $(function () { //Hacer que sea un submit en vez de mostrarse en la misma web           
+            $("#send").click(function () {                
+                var send = $(".fmrRegister").formToJSON();
+                $("#result").text(send);//Muestra en la web el JSON a enviar
+                //$.post("http://localhost:155/User/AddUser", send,
+                //    function (data) {
+                //        alert("respuesta server: " + data);
+                //    },
+                //    "json");
 
-        $(function () { //Hacer que sea un submit en vez de mostrarse en la misma web
-            $(".fmrRegister").submit(function () {                
-                $("#result").text((JSON.stringify($(".fmrRegister").serializeObject())));
+                $.ajax({
+                    url: "http://localhost:155/User/AddUser",
+                    type: "POST",
+                    data: send
+                });
                 return false;
             });
-        });
+        });        
     </script>
 </head>
-    <body>        
-       <!-- <form class ="fmrRegister" action="{{ url_for('AddUser') }}" method="post">
-	    <dl>
-            <dt>Nom:</dt> 
-            <dd><input id="Name" type="text"/></dd>            
-            <dt>Cognom:</dt>
-            <dd><input id="LastName" type="text" /></dd>
-            <dt>DNI:</dt>
-            <dd><input id="DNI" type="text" /></dd>
-            <dt>Edat:</dt>
-            <dd><input id="Age" type="text" /></dd>
-            <dt>Sexe:</dt>
-            <dd><input id="Gender" type="text" /></dd>
-            <dt>Password:</dt>
-            <dd><input id="Password" type="password" /></dd>
-            <dd><p><input id="button" type="submit" value ="Submit"/></p></dd><!--onclick ="SendValor()"
-	    </dl>  
-        </form>
-        <h2>JSON</h2>
-        <pre id="result"></pre> -->        
+    <body>              
         <form class ="fmrRegister" action="{{ url_for('AddUser') }}" method="post">
-        Nom:<input type="text" name="Fname" maxlength="12" size="12"/> <br/>
-        Cognom:<input type="text" name="Lname" maxlength="36" size="12"/> <br/>
+        Nom:<input type="text" name="Name" maxlength="12" size="12"/> <br/>
+        Cognom:<input type="text" name="LastName" maxlength="36" size="12"/> <br/>
         Gender:<br/>
-        Male:<input type="radio" name="gender" value="Male"/><br/>
-        Female:<input type="radio" name="gender" value="Female"/><br/>
+        Male:<input type="radio" name="Gender" value="Male"/><br/>
+        Female:<input type="radio" name="Gender" value="Female"/><br/>
         DNI:<input type="text" name="DNI" /><br/>
         Edat:<input type="text" name="Age"/><br/>
-        Password:<input type="password" name="password"/><br/>
-        <p><input type="submit" /></p>
+        Password:<input type="password" name="Password"/><br/>
+        <input id="send" type="submit" name="Submit" /></>
         </form>
-        <h2>JSON</h2>
+        <!-- Para mostrar el JSON a enviar -->
+        <h2>JSON</h2> 
         <pre id="result">
         </pre>
 </body>
