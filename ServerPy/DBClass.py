@@ -84,6 +84,12 @@ class GetUser(object):
         resp = Response(js,status=200, mimetype='application/json')    
         return resp
 
+###############
+###         ###
+###  LOGIN  ###
+###         ###
+###############
+
 class LogUser(object):
     def __init__(self,name,password):
         self.name = name    
