@@ -8,7 +8,7 @@ from ServerPy import app
 def AddUser(): 
     conn = sqlite3.connect('IS.db')
     c = conn.cursor()    
-    try:        
+    try:          
         usuario = request.json                                   
         u = DBClass.User(usuario)                 
         c.execute("INSERT INTO Usuari VALUES (?,?,?,?,?,?)",[u.DNI,u.name,u.lastname,u.age,u.password,u.gender])
@@ -20,10 +20,10 @@ def AddUser():
     data = {
                 "DNI":u.DNI
     }
-    #js = json.dumps(data)
-    #resp = Response(js,status=200, mimetype='application/json')    
-    #return resp     
-    return "OK"
+    js = json.dumps(data)
+    resp = Response(js,status=200, mimetype='application/json')    
+    return resp     
+    #return "OK"
 
 @app.route("/User/Del",methods = ['DELETE']) #Eliminar fila
 def DelUser():

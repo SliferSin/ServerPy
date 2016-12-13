@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -76,17 +75,19 @@
         $(function () { //Hacer que sea un submit en vez de mostrarse en la misma web           
             $("#send").click(function () {                
                 var send = $(".fmrRegister").formToJSON();
-                $("#result").text(send);//Muestra en la web el JSON a enviar
-                //$.post("http://localhost:155/User/AddUser", send,
-                //    function (data) {
-                //        alert("respuesta server: " + data);
-                //    },
-                //    "json");
+                //$("#result").text(send);//Muestra en la web el JSON a enviar                
 
                 $.ajax({
                     url: "http://localhost:155/User/AddUser",
                     type: "POST",
-                    data: send
+                    data: send,
+                    dataType: 'json',
+                    success: function (responseData) {
+                        for (var key in responseData) {
+                            $("#Afegit").show();
+                            $("#result").text("DNI:" + responseData[key]);
+                        }
+                    }
                 });
                 return false;
             });
@@ -106,7 +107,7 @@
         <input id="send" type="submit" name="Submit" /></>
         </form>
         <!-- Para mostrar el JSON a enviar -->
-        <h2>JSON</h2> 
+        <h2 id="Afegit" hidden="hidden">Registrat</h2> 
         <pre id="result">
         </pre>
 </body>
