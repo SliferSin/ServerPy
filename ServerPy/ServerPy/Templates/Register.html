@@ -87,7 +87,11 @@
                         for (var key in responseData) {
                             $("#Afegit").show();
                             $("#result").text("DNI:" + responseData[key]);
-                        }
+                        }                        
+                    },
+                    error: function(){
+                        $("#Error").show();
+                        $("#result").text("DNI:" + responseData[key]);
                     }
                 });
                 return false;
@@ -105,10 +109,11 @@
         DNI:<input type="text" name="DNI" /><br/>
         Edat:<input type="text" name="Age"/><br/>
         Password:<input type="password" name="Password"/><br/>
-        <input id="send" type="submit" name="Submit" /></>
+        <input id="send" type="submit" name="Submit" />
         </form>
         <!-- Para mostrar el JSON a enviar -->
         <h2 id="Afegit" hidden="hidden">Registrat</h2> 
+        <h2 id ="Error" hidden ="hidden">Error al registrar</h2>
         <pre id="result"></pre>
 </body>
 </html>

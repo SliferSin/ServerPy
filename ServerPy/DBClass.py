@@ -83,6 +83,17 @@ class GetUser(object):
         js = json.dumps(data)
         resp = Response(js,status=200, mimetype='application/json')    
         return resp
+    
+    def CreateFile(self):
+        f = open('datos.txt','w')
+        f.write("DNI:" + self.DNI + '\t')
+        f.write("Nom:" + self.name + '\t')
+        f.write("Cognom:" + self.lastname + '\t')
+        f.write("Edat:" + self.age + '\n')
+        #f.write("Dades:" + self.DNI + '\n') #bucle para englobar todos los datos contenidos en el margen de fecha
+        
+        f.close()
+
 
 ###############
 ###         ###
