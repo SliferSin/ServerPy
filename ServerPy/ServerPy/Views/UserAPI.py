@@ -72,7 +72,8 @@ def GetFile():
         c.execute("SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.X,d.Y,d.Z,d.data,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ? and d.Data between ? and ?",[uDNI,startDate,endDate])
         info_usuari = c.fetchone()
         info = DBClass.GetUser(info_usuari)        
-        resp = info.Send()            
+        resp = info.Send()  
+        info.CreateFile()         
         
     except sqlite3.Error as e:
         print("Error:",e.args[0])

@@ -85,7 +85,7 @@ class GetUser(object):
         return resp
     
     def CreateFile(self):
-        f = open('datos.txt','w')
+        f = open('dades.txt','w')
         f.write("DNI:" + self.DNI + '\t')
         f.write("Nom:" + self.name + '\t')
         f.write("Cognom:" + self.lastname + '\t')

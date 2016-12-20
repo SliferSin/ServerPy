@@ -16,6 +16,7 @@
                     success: function (responseData) {
                         for (var key in responseData) {
                             $("#Dades").show();
+                            $("Downbutton").show();
                             $("#result").text("DNI:" + responseData[key]);
                         }                        
                     },
@@ -39,6 +40,7 @@
         <h2 id="Dades" hidden="hidden">Info Usuari</h2> 
         <h2 id ="Error" hidden ="hidden">Error al obtenir la informació</h2>
         <pre id="result"></pre>
+       <a id="Downbutton" hidden="hidden" href="download/dades.txt" download="Dades.txt">Download</a>       
     </form>    
 </body>
 </html>
