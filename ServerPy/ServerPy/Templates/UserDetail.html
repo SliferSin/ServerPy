@@ -33,16 +33,14 @@
 </head>
 <body>
     <form id ="fmrSearch" action="{{ url_for('GetFile') }}" method = "get">
-        Buscar:<input id ="DNI " type="text" name="dni"/><br/>
-        Data: <br />desde:<input id ="Data" type="text"/><br/>
-        fins:<input id ="Data2" type="text"/><br/>
+        Buscar DNI:<input id ="DNI " type="text" name="dni"/><br/>
+        Data <br/>desde:<input id ="DataInici" type="text"/><br/>
+        fins:<input id ="DataFinal" type="text"/><br/>
         <input id="button" type ="submit" value ="Submit"/><br />
         <h2 id="Dades" hidden="hidden">Info Usuari</h2> 
         <h2 id ="Error" hidden ="hidden">Error al obtenir la informacio</h2>
-        <pre id="result"></pre>
-        <!--<a id="Downbutton" hidden="hidden" href="download/dades.txt" download="Dades.txt">Download</a>-->    
-        <a id="Downbutton" href="\download\dades.txt" download="Dades.txt">Download</a>
-        <!--<a id="Downbutton" href="{{ url_for('download', filename='dades.txt') }}">Download</a>-->
+        <pre id="result"></pre>        
+        <a id="Downbutton" href="\download\dades.txt" download="Dades.txt">Download</a>        
     </form>    
 </body>
 </html>

@@ -71,7 +71,7 @@ def GetFile():
         startDate = request.arg.get('Data')
         endDate = request.arg.get('Data2')
         c.execute("SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.X,d.Y,d.Z,d.data,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ? and d.Data between ? and ?",[uDNI,startDate,endDate])
-        info_usuari = c.fetchone()
+        info_usuari = c.fetchone() #fetchall()
         info = DBClass.GetUser(info_usuari)        
         resp = info.Send()  
         info.CreateFile()         
