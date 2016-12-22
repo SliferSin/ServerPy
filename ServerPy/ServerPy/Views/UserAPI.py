@@ -1,7 +1,7 @@
 import sqlite3
 import json
 import DBClass
-from flask import Flask,request,Response,redirect,url_for,render_template
+from flask import Flask,request,Response,redirect,url_for,render_template,send_file
 from ServerPy import app 
 
 
@@ -85,3 +85,8 @@ def GetFile():
 @app.route('/file')
 def File():
     return render_template('UserDetail.html')
+
+#Descarregar el fitxer de dades
+@app.route('/download/dades.txt')
+def download():        
+    return send_file("./download/dades.txt")

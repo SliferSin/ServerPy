@@ -41,7 +41,8 @@
         <h2 id ="Error" hidden ="hidden">Error al obtenir la informacio</h2>
         <pre id="result"></pre>
         <!--<a id="Downbutton" hidden="hidden" href="download/dades.txt" download="Dades.txt">Download</a>-->    
-        <a id="Downbutton" href="..\download\dades.txt" download="Dades.txt">Download</a>
+        <a id="Downbutton" href="\download\dades.txt" download="Dades.txt">Download</a>
+        <!--<a id="Downbutton" href="{{ url_for('download', filename='dades.txt') }}">Download</a>-->
     </form>    
 </body>
 </html>
