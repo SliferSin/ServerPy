@@ -3,44 +3,45 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title>Busqueda de datos</title>
+    <title>Busqueda de dades</title>
     <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
-        $(function () {
-            $("#button").submit(function(){
-                $.ajax({
-                    url: "http://localhost:155/User/GetFile",
-                    type: "GET",
-                    data: send,
-                    dataType: 'json',
-                    success: function (responseData) {
-                        for (var key in responseData) {
-                            $("#Dades").show();
-                            $("Downbutton").show();
-                            $("#result").text("DNI:" + responseData[key]);
-                        }                        
-                    },
-                    error: function(){
-                        $("#Error").show();
-                        $("#result").text("DNI:" + responseData[key]);
-                    }
-                });
-                return false;
-            });
-        });
+        //$(function () {
+        //    $("#button").submit(function(){
+        //        $.ajax({
+        //            url: "http://localhost:155/User/GetFile",
+        //            type: "GET",
+        //            data: send,
+        //            dataType: 'json',
+        //            success: function (responseData) {
+        //                for (var key in responseData) {
+        //                    $("#Dades").show();
+        //                    $("Downbutton").show();
+        //                    $("#result").text("DNI:" + responseData[key]);
+        //                }                        
+        //            },
+        //            error: function(){
+        //                $("#Error").show();
+        //                $("#result").text("DNI:" + responseData[key]);
+        //            }
+        //        });
+        //        return false;
+        //    });
+        //});
     </script>
 
 </head>
 <body>
     <form id ="fmrSearch" action="{{ url_for('GetFile') }}" method = "get">
-        Buscar:<input id ="DNI " type="text" value="DNI" name="dni"/><br/>
-        Data: <br />desde:<input id ="Data" type="text" name="dd/mm/aaa" /><br/>
-        fins:<input id ="Data2" type="text" name="dd/mm/aaa" /><br/>
+        Buscar:<input id ="DNI " type="text" name="dni"/><br/>
+        Data: <br />desde:<input id ="Data" type="text"/><br/>
+        fins:<input id ="Data2" type="text"/><br/>
         <input id="button" type ="submit" value ="Submit"/><br />
         <h2 id="Dades" hidden="hidden">Info Usuari</h2> 
-        <h2 id ="Error" hidden ="hidden">Error al obtenir la informació</h2>
+        <h2 id ="Error" hidden ="hidden">Error al obtenir la informacio</h2>
         <pre id="result"></pre>
-       <a id="Downbutton" hidden="hidden" href="download/dades.txt" download="Dades.txt">Download</a>       
+        <!--<a id="Downbutton" hidden="hidden" href="download/dades.txt" download="Dades.txt">Download</a>-->    
+        <a id="Downbutton" href="..\download\dades.txt" download="Dades.txt">Download</a>
     </form>    
 </body>
 </html>

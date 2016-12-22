@@ -1,8 +1,9 @@
 import sqlite3
 import json
 import DBClass
-from flask import Flask,request,Response
+from flask import Flask,request,Response,redirect,url_for,render_template
 from ServerPy import app 
+
 
 @app.route("/User/AddUser", methods = ['POST']) #Afegir fila
 def AddUser(): 
@@ -80,3 +81,7 @@ def GetFile():
     
     conn.close()
     return resp
+
+@app.route('/file')
+def File():
+    return render_template('UserDetail.html')
