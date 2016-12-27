@@ -84,13 +84,27 @@ class GetUser(object):
         resp = Response(js,status=200, mimetype='application/json')    
         return resp
     
-    def CreateFile(self):
+    def CreateFile(self,DataInicial,DataFin):
         f = open('./download/dades.txt','w')
         f.write("DNI:" + self.DNI + '\t')
         f.write("Nom:" + self.name + '\t')
         f.write("Cognom:" + self.lastname + '\t')
         f.write("Edat:" + self.age + '\n')
-        #f.write("Dades:" + self.DNI + '\n') #bucle para englobar todos los datos contenidos en el margen de fecha
+        #Lectura i escriptura de les dades amb timestamp
+        conn = sqlite3.connect('IS.db')
+        c = conn.cursor()
+        try:
+            c.execute("SELECT Data,X,Y,Z FROM Usuari WHERE Data BETWEEN ? AND ?",[DataInicial,DataFin])
+            conn.commit()    
+            Data = c.fetchall()
+
+            if Data != null:
+                for row in Data:
+                    f.write(row + '\n')
+        except sqlite3.Error as e:
+            print("Error: ",e.args[0])
+        
+        conn.close()
         
         f.close()
 

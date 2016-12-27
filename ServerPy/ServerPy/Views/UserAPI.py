@@ -74,7 +74,7 @@ def GetFile():
         info_usuari = c.fetchone() #fetchall()
         info = DBClass.GetUser(info_usuari)        
         resp = info.Send()  
-        info.CreateFile()         
+        info.CreateFile(startDate,endDate)         
         
     except sqlite3.Error as e:
         print("Error:",e.args[0])
