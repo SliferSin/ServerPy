@@ -60,14 +60,13 @@ def GetUser():
     conn.close()
     return resp
 
-#localhost:155/User/GetInfo?DNI=1234
+#localhost:155/User/GetFile?DNI=1234
 @app.route('/User/GetFile',methods = ['GET']) #Obtenir fitxer per lectura en octave
 def GetFile():
     conn = sqlite3.connect('IS.db')
     c = conn.cursor()
-
     try:        
-        uDNI = request.args.get('DNI')    
+        uDNI = request.arg.get('DNI','')    
         startDate = request.arg.get('Data')
         endDate = request.arg.get('Data2')
         c.execute("SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.X,d.Y,d.Z,d.data,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ? and d.Data between ? and ?",[uDNI,startDate,endDate])

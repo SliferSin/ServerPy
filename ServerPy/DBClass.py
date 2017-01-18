@@ -66,7 +66,7 @@ class GetUser(object):
         self.z = j[6]
         self.data = j[7]
         self.ID_Sensor = j[8]
-
+        
 #Metode Send per retornar la informació en format JSON    
     def Send(self):
         data = {
@@ -107,7 +107,6 @@ class GetUser(object):
         conn.close()
         
         f.close()
-
 
 ###############
 ###         ###

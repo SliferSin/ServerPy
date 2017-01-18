@@ -18,4 +18,4 @@ def DelSensor():
         conn.commit()    
 
     conn.close()    
-    return "Fila insertada"
+    return "Fila eliminada"
