@@ -52,6 +52,7 @@
     <Content Include="ServerPy\Templates\layout.html" />
     <Content Include="ServerPy\Templates\log.html" />
     <Content Include="ServerPy\Templates\Register.html" />
+    <Content Include="ServerPy\Templates\Styles.css" />
     <Content Include="ServerPy\Templates\UserDetail.html" />
   </ItemGroup>
   <PropertyGroup>

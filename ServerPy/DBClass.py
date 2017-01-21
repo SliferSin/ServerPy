@@ -54,7 +54,6 @@ class DelUser(object):
         self.DNI = j['DNI']
 
 #Estructura per obtenir dades mitjançant un DNI
-
 class GetUser(object):
     def __init__(self, j):
         self.DNI = j[0]
@@ -83,9 +82,7 @@ class GetUser(object):
         js = json.dumps(data)        
         resp = Response(js,status=200, mimetype='application/json')    
         return resp
-    #
-    #  No escribe T___T
-    # 
+  
     def CreateFile(self,DataInicial,DataFin): 
         f = open('./ServerPy/download/dades.txt','w')
         
@@ -97,8 +94,7 @@ class GetUser(object):
         conn = sqlite3.connect('IS.db')
         c = conn.cursor()
         try:
-            c.execute("SELECT Data,X,Y,Z FROM Dades WHERE Data BETWEEN '18/01/2017' AND '19/01/2017'")#,[DataInicial,DataFin])
-            #conn.commit()    
+            c.execute("SELECT Data,X,Y,Z FROM Dades WHERE Data BETWEEN '18/01/2017' AND '19/01/2017'")#,[DataInicial,DataFin])             
             Data = c.fetchall()
             
             for row in Data:

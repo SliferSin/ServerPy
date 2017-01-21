@@ -86,14 +86,14 @@
 </head>
     <body>              
         <form class ="fmrRegister" action="{{ url_for('AddUser') }}" method="post">
-        Nom:<input type="text" name="Name" maxlength="12" size="12"/> <br/>
-        Cognom:<input type="text" name="LastName" maxlength="36" size="12"/> <br/>
-        Gender:<br/>
-        Male:<input type="radio" name="Gender" value="Male"/><br/>
-        Female:<input type="radio" name="Gender" value="Female"/><br/>
-        DNI:<input type="text" name="DNI" /><br/>
-        Edat:<input type="text" name="Age"/><br/>
-        Password:<input type="password" name="Password"/><br/>
+        <p id="Name">Nom:<input type="text" name="Name" maxlength="12" size="12"/></p>
+        <p id="Lastname">Cognom:<input type="text" name="LastName" maxlength="36" size="12"/></p>
+        <p id="Gender">Gender:<br/>
+        <div id=" opcion">Male:<input type="radio" name="Gender" value="Male"/><br/>
+        Female:<input type="radio" name="Gender" value="Female"/></div></p>
+        <p id="DNI">DNI:<input type="text" name="DNI" /></p>
+        <p id="Age">Edat:<input type="text" name="Age"/></p>
+        <p id="Pass">Password:<input type="password" name="Password"/></p>
         <input id="send" type="submit" name="Submit" />
         </form>
         <!-- Para mostrar el JSON a enviar -->

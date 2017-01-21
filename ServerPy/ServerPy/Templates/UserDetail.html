@@ -62,15 +62,11 @@
     </script>-->
 </head>
 <body>
-   
-
-
     <form class ="fmrSearch" action="{{ url_for('GetFile') }}" method="get">
-        DNI:<input type="text" name="DNI" maxlength="8" size="12"/> <br/>
-        Data <br/>desde:<input id ="DataInici" type="date" name="Data"/><br/>
-        fins:<input id ="DataFinal" type="date" name ="Data2"/><br/>        
+        <p id="DNI">DNI:<input type="text" name="DNI" maxlength="8" size="12"/></p>
+        <p id="Datainici"> Data inici: <input id ="DataInici" type="date" name="Data"/></p>
+        <p id="Datafinal">Data final: <input id ="DataFinal" type="date" name ="Data2"/></p>       
         <input id="button" type ="submit" value ="Submit"/><br />         
-       
      </form>
 </body>
 </html>
