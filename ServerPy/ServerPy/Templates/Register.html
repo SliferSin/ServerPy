@@ -54,21 +54,6 @@
             });
             return JSON.stringify(objectGraph);
         };
-        //$.fn.serializeObject = function() {
-        //    var o = {};
-        //    var a = this.serializeArray();
-        //    $.each(a, function() {
-        //        if (o[this.name] !== undefined) {
-        //            if (!o[this.name].push) {
-        //                o[this.name] = [o[this.name]];
-        //            }
-        //            o[this.name].push(this.value || '');
-        //        } else {
-        //            o[this.name] = this.value || '';
-        //        }
-        //    });
-        //    return o;
-        //};
         $.ajaxSetup({
             contentType: "application/json;charset=utf-8",
             dataType: "json"
@@ -76,7 +61,7 @@
         $(function () { //Hacer que sea un submit en vez de mostrarse en la misma web           
             $("#send").click(function () {                
                 var send = $(".fmrRegister").formToJSON();
-                //$("#result").text(send);//Muestra en la web el JSON a enviar                
+                $("#result").text(send);//Muestra en la web el JSON a enviar                
 
                 $.ajax({
                     url: "http://localhost:155/User/AddUser",

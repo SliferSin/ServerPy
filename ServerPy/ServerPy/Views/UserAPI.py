@@ -47,8 +47,7 @@ def GetUser():
     c = conn.cursor()
     try:
         #if request.headers['Content-Type'] == 'application/json':
-        uDNI = request.args.get('DNI')
-        print(uDNI)
+        uDNI = request.args.get('DNI')        
         c.execute("SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.X,d.Y,d.Z,d.data,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ?",[uDNI])
         info_usuari = c.fetchone()
         info = DBClass.GetUser(info_usuari)
@@ -64,22 +63,23 @@ def GetUser():
 @app.route('/User/GetFile',methods = ['GET']) #Obtenir fitxer per lectura en octave
 def GetFile():
     conn = sqlite3.connect('IS.db')
-    c = conn.cursor()
-    try:        
-        uDNI = request.arg.get('DNI','')    
-        startDate = request.arg.get('Data')
-        endDate = request.arg.get('Data2')
-        c.execute("SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.X,d.Y,d.Z,d.data,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ? and d.Data between ? and ?",[uDNI,startDate,endDate])
+    c = conn.cursor()        
+    try:
+        uDNI = request.args.get('DNI')            
+        startDate = request.args.get('Data')
+        endDate = request.args.get('Data2')             
+        c.execute("SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.X,d.Y,d.Z,d.data,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ? and d.Data between '18-01-2017' and '19-01-2017'",[uDNI])#,startDate,endDate])        
         info_usuari = c.fetchone() #fetchall()
-        info = DBClass.GetUser(info_usuari)        
-        resp = info.Send()  
-        info.CreateFile(startDate,endDate)         
+        info = DBClass.GetUser(info_usuari)                        
+        #resp = info.Send()  
+        
+        info.CreateFile(startDate,endDate)       
         
     except sqlite3.Error as e:
         print("Error:",e.args[0])
     
     conn.close()
-    return resp
+    return render_template("DownloadFile.html")
 
 @app.route('/file')
 def File():

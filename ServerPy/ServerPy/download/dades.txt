@@ -1,1 +1,2 @@
-hola
+DNI:5678	Nom:Anton	Cognom:Prada	Edat:30
+('18/01/2017', 23, 23, 27)

@@ -48,6 +48,7 @@
     <Folder Include="ServerPy\Views\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ServerPy\Templates\DownloadFile.html" />
     <Content Include="ServerPy\Templates\layout.html" />
     <Content Include="ServerPy\Templates\log.html" />
     <Content Include="ServerPy\Templates\Register.html" />

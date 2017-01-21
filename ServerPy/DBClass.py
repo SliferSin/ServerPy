@@ -80,12 +80,15 @@ class GetUser(object):
             "Data":self.data,
             "ID_Sensor":self.ID_Sensor        
         }
-        js = json.dumps(data)
+        js = json.dumps(data)        
         resp = Response(js,status=200, mimetype='application/json')    
         return resp
-    
-    def CreateFile(self,DataInicial,DataFin):
-        f = open('./download/dades.txt','w')
+    #
+    #  No escribe T___T
+    # 
+    def CreateFile(self,DataInicial,DataFin): 
+        f = open('./ServerPy/download/dades.txt','w')
+        
         f.write("DNI:" + self.DNI + '\t')
         f.write("Nom:" + self.name + '\t')
         f.write("Cognom:" + self.lastname + '\t')
@@ -94,13 +97,12 @@ class GetUser(object):
         conn = sqlite3.connect('IS.db')
         c = conn.cursor()
         try:
-            c.execute("SELECT Data,X,Y,Z FROM Usuari WHERE Data BETWEEN ? AND ?",[DataInicial,DataFin])
-            conn.commit()    
+            c.execute("SELECT Data,X,Y,Z FROM Dades WHERE Data BETWEEN '18/01/2017' AND '19/01/2017'")#,[DataInicial,DataFin])
+            #conn.commit()    
             Data = c.fetchall()
-
-            if Data != null:
-                for row in Data:
-                    f.write(row + '\n')
+            
+            for row in Data:
+                f.writelines(str(row))
         except sqlite3.Error as e:
             print("Error: ",e.args[0])
         

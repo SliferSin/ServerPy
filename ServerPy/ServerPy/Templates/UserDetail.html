@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>Busqueda de dades</title>
     <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-      <script>
+     <!-- <script>
         $.fn.formToJSON = function () {
             var objectGraph = {};
             function add(objectGraph, name, value) {
@@ -33,45 +33,44 @@
                 }
             });
             return JSON.stringify(objectGraph);
-        };
-
+        };-->
+    <!--<script>
         $(function () {
             $("#button").submit(function () {
-                var send = $(".fmrRegister").formToJSON();
+                
+                $("#result").text(button);//Muestra en la web el JSON a enviar    
 
                 $.ajax({
                     url: "http://localhost:155/User/GetFile",
                     type: "GET",
-                    data: send,
-                    dataType: 'json',
+                    data: send,                    
                     success: function (responseData) {
                         for (var key in responseData) {
                             $("#Dades").show();
-                            $("Downbutton").show();
+                            $("#Downbutton").show();
                             $("#result").text("DNI:" + responseData[key]);
                         }                        
                     },
                     error: function(){
                         $("#Error").show();
-                        $("#result").text("DNI:" + responseData[key]);
+                        //$("#result").text("DNI:" + responseData[key]);
                     }
                 });
                 return false;
             });
         });
-    </script>
-
+    </script>-->
 </head>
 <body>
-    <form id ="fmrSearch" action="{{ url_for('GetFile') }}" method = "get">
-        Buscar DNI:<input id ="DNI " type="text" name="dni"/><br/>
-        Data <br/>desde:<input id ="DataInici" type="text"/><br/>
-        fins:<input id ="DataFinal" type="text"/><br/>
-        <input id="button" type ="submit" value ="Submit"/><br />
-        <h2 id="Dades" hidden="hidden">Info Usuari</h2> 
-        <h2 id ="Error" hidden ="hidden">Error al obtenir la informacio</h2>
-        <pre id="result"></pre>        
-        <a id="Downbutton" href="\download\dades.txt" download="Dades.txt">Download</a>        
-    </form>    
+   
+
+
+    <form class ="fmrSearch" action="{{ url_for('GetFile') }}" method="get">
+        DNI:<input type="text" name="DNI" maxlength="8" size="12"/> <br/>
+        Data <br/>desde:<input id ="DataInici" type="date" name="Data"/><br/>
+        fins:<input id ="DataFinal" type="date" name ="Data2"/><br/>        
+        <input id="button" type ="submit" value ="Submit"/><br />         
+       
+     </form>
 </body>
 </html>

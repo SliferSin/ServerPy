@@ -6,19 +6,29 @@ from ServerPy import app
 from flask import Flask,request
 from datetime import datetime
        
-@app.route("/Dades/Add/", methods = ['POST']) #Afegir fila
-def AddDades(): 
-    conn = sqlite3.connect('IS.db')
-    c = conn.cursor()
-   
-    if request.headers['Content-Type'] == 'application/json':
-        data = request.json
-        d = Dades(data)
-        c.execute("INSERT INTO Dades VALUES (?,?,?,?,?)",[d.ID_Sensor,d.Data,d.X,d.Y,d.Z])
-        conn.commit()    
+#@app.route("/Dades/Add/", methods = ['POST']) #Afegir fila
+#def AddDades(): 
+  
+    # ::Formato:: 
+    # ID_Sensor: X,
+    # Data: 27/01/2017,
+    # X: 213,
+    # Y: 156,
+    # Z: 195,
 
-    conn.close()    
-    return "Entrada insertada"
+    #conn = sqlite3.connect('IS.db')
+    #c = conn.cursor()
+
+    #f = open('./ficherodondeeste/dades.txt','r')
+    #datos = f.read()
+    
+    #for row in datos:
+    #    d = Dades(row)                       
+    #    c.execute("INSERT INTO Dades VALUES (?,?,?,?,?)",[d.ID_Sensor,d.Data,d.X,d.Y,d.Z])
+    #    conn.commit()   
+   
+    #conn.close()    
+    #return "Entrada insertada"
 
 @app.route("/Dades/Del/", methods = ['DELETE'])
 def DelDades():
