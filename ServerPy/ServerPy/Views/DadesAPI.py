@@ -23,15 +23,17 @@ def AddDades():
 
     Dades = f.readline().split(',') # Coordenades X,Y,Z
     
-    
-    while len(Dades) > 1:
-        print(Dades)
-        ZData = Dades[2].replace('\n',' ') #Eliminem el '\n'
-        c.execute("INSERT INTO Dades VALUES (?,?,?,?,?)",[ID,data,Dades[0],Dades[1],ZData])           
-        Dades = f.readline().split(',') #Coordenades X,Y,Z
+    while len(data) > 1:
+        while len(Dades) > 1:        
+            ZData = Dades[2].replace('\n',' ') #Eliminem el '\n'
+            c.execute("INSERT INTO Dades VALUES (?,?,?,?,?)",[ID,data,Dades[0],Dades[1],ZData])           
+            Dades = f.readline().split(',') #Coordenades X,Y,Z
+        
+        data = f.readline()
    
     conn.commit()
-    conn.close()    
+    conn.close() 
+    f.close()   
     return "Entrada insertada"
 
 @app.route("/Dades/Del/", methods = ['DELETE'])
