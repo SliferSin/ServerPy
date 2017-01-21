@@ -6,29 +6,33 @@ from ServerPy import app
 from flask import Flask,request
 from datetime import datetime
        
-#@app.route("/Dades/Add/", methods = ['POST']) #Afegir fila
-#def AddDades(): 
+@app.route("/Dades/Add/") #Afegir fila
+def AddDades(): 
   
     # ::Formato:: 
-    # ID_Sensor: X,
-    # Data: 27/01/2017,
-    # X: 213,
-    # Y: 156,
-    # Z: 195,
-
-    #conn = sqlite3.connect('IS.db')
-    #c = conn.cursor()
-
-    #f = open('./ficherodondeeste/dades.txt','r')
-    #datos = f.read()
+    # ID_Sensor
+    # Data
+    # X,Y,Z,
     
-    #for row in datos:
-    #    d = Dades(row)                       
-    #    c.execute("INSERT INTO Dades VALUES (?,?,?,?,?)",[d.ID_Sensor,d.Data,d.X,d.Y,d.Z])
-    #    conn.commit()   
+    conn = sqlite3.connect('IS.db')
+    c = conn.cursor()
+
+    f = open('./ServerPy/download/Entrades.txt','r')
+    ID = f.readline()
+    data = f.readline()
+
+    Dades = f.readline().split(',') # Coordenades X,Y,Z
+    
+    
+    while len(Dades) > 1:
+        print(Dades)
+        ZData = Dades[2].replace('\n',' ') #Eliminem el '\n'
+        c.execute("INSERT INTO Dades VALUES (?,?,?,?,?)",[ID,data,Dades[0],Dades[1],ZData])           
+        Dades = f.readline().split(',') #Coordenades X,Y,Z
    
-    #conn.close()    
-    #return "Entrada insertada"
+    conn.commit()
+    conn.close()    
+    return "Entrada insertada"
 
 @app.route("/Dades/Del/", methods = ['DELETE'])
 def DelDades():
