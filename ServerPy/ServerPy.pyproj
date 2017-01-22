@@ -44,6 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ServerPy\" />
+    <Folder Include="ServerPy\static\" />
+    <Folder Include="ServerPy\static\styles\" />
     <Folder Include="ServerPy\Templates\" />
     <Folder Include="ServerPy\Views\" />
   </ItemGroup>
@@ -52,7 +54,7 @@
     <Content Include="ServerPy\Templates\layout.html" />
     <Content Include="ServerPy\Templates\log.html" />
     <Content Include="ServerPy\Templates\Register.html" />
-    <Content Include="ServerPy\Templates\Styles.css" />
+    <Content Include="ServerPy\static\styles\Style.css" />
     <Content Include="ServerPy\Templates\UserDetail.html" />
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,26 @@
+body
+{
+	background-color: #009999;
+}
+#DNI {
+	color: #003333;
+	font-family: Georgia;
+	font-size: 20px;
+}
+#Datainici{
+	color: #003333;
+	font-family: Georgia;
+	font-size: 20px;
+}
+#Datafinal{
+	color: #003333;
+	font-family: Georgia;
+	font-size: 20px;
+}
+#formularis{
+	font-size:15px;
+}
+#Downbutton{
+	font-family: Georgia;
+	font-size: 20px;
+}
