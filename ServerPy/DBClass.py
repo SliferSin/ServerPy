@@ -2,11 +2,11 @@ import json
 import sqlite3
 from flask import Response
 
-##############
-###        ###
-###  DADES ###
-###        ###
-##############
+###############
+###         ###
+###  DADES  ###
+###         ###
+###############
 #Estructura per afegir les dades
 class Dades(object):
     def __init__(self, j):
@@ -22,22 +22,22 @@ class DelDades(object):
         self.ID_Usuari = j['ID_Usuari']
         self.Data = j['Data']
 
-###############
-###         ###
-###  SENSOR ###
-###         ###
-###############
+################
+###          ###
+###  SENSOR  ###
+###          ###
+################
 class Sensor(object):
     def __init__(self, j):
         self.ID = j['ID']
         self.ID_Propietari = j['ID_Propietari']
         self.ID_Usuari = j['ID_Usuari']
 
-###############
-###         ###
-###  USUARI ###
-###         ###
-###############
+################
+###          ###
+###  USUARI  ###
+###          ###
+################
 #Estructura per afegir usuari
 class User(object):
     def __init__(self, j):
@@ -111,7 +111,6 @@ class GetUser(object):
 ###  LOGIN  ###
 ###         ###
 ###############
-
 class LogUser(object):
     def __init__(self,name,password):
         self.name = name    
