@@ -3,6 +3,7 @@ import json
 import DBClass
 from flask import Flask,request,Response,redirect,url_for,render_template,send_file
 from ServerPy import app 
+from datetime import datetime
 
 
 @app.route("/User/AddUser", methods = ['POST']) #Afegir fila
@@ -45,10 +46,9 @@ def DelUser():
 def GetUser():
     conn = sqlite3.connect('IS.db')
     c = conn.cursor()
-    try:
-        #if request.headers['Content-Type'] == 'application/json':
+    try:        
         uDNI = request.args.get('DNI')        
-        c.execute("SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.X,d.Y,d.Z,d.data,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ?",[uDNI])
+        c.execute("SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.ID_Sensor FROM Usuari u, Dades d,Sensor s WHERE u.DNI = ?",[uDNI])
         info_usuari = c.fetchone()
         info = DBClass.GetUser(info_usuari)
         resp = info.Send()            
@@ -67,13 +67,18 @@ def GetFile():
     try:
         uDNI = request.args.get('DNI')            
         startDate = request.args.get('Data')
-        endDate = request.args.get('Data2')             
-        c.execute("SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.X,d.Y,d.Z,d.data,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ? and d.Data between '18-01-2017' and '19-01-2017'",[uDNI])#,startDate,endDate])        
-        info_usuari = c.fetchone() #fetchall()
-        info = DBClass.GetUser(info_usuari)                        
-        #resp = info.Send()  
+        endDate = request.args.get('Data2')  
+        formStartDate = datetime.strptime(startDate,'%Y-%m-%d')
+        formEndDate = datetime.strptime(endDate,'%Y-%m-%d')  
+        DateStart = "'" +str(formStartDate.date())+ "'"
+        DateEnd = "'" +str(formEndDate.date())+ "'"        
         
-        info.CreateFile(startDate,endDate)       
+        sql = "SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ? and d.Data between '2017/01/18' and '2017/01/19'"
+        c.execute(sql,[uDNI])#,DateStart,DateEnd])
+        info_usuari = c.fetchone() #fetchall()
+        info = DBClass.GetUser(info_usuari)
+        
+        info.CreateFile(DateStart,DateEnd)       
         
     except sqlite3.Error as e:
         print("Error:",e.args[0])

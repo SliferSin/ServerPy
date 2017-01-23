@@ -59,12 +59,8 @@ class GetUser(object):
         self.DNI = j[0]
         self.name = j[1]
         self.lastname = j[2]
-        self.age = j[3]
-        self.x = j[4]
-        self.y = j[5]
-        self.z = j[6]
-        self.data = j[7]
-        self.ID_Sensor = j[8]
+        self.age = j[3]               
+        self.ID_Sensor = j[4]
         
 #Metode Send per retornar la informació en format JSON    
     def Send(self):
@@ -72,11 +68,7 @@ class GetUser(object):
             "DNI": self.DNI,
             "Name": self.name,
             "LastName": self.lastname,
-            "Age":self.age,
-            "X":self.x,
-            "Y":self.y,
-            "Z":self.z,
-            "Data":self.data,
+            "Age":self.age,                      
             "ID_Sensor":self.ID_Sensor        
         }
         js = json.dumps(data)        
@@ -94,7 +86,8 @@ class GetUser(object):
         conn = sqlite3.connect('IS.db')
         c = conn.cursor()
         try:
-            c.execute("SELECT Data,X,Y,Z FROM Dades WHERE Data BETWEEN '18/01/2017' AND '19/01/2017'")#,[DataInicial,DataFin])             
+            print("Senosr: "+ str(self.ID_Sensor))
+            c.execute("SELECT Data,X,Y,Z FROM Dades WHERE ID_Sensor = ? and Data BETWEEN '2017/01/18' AND '2017/01/19'",[self.ID_Sensor])#,DataInicial,DataFin])
             Data = c.fetchall()
             
             for row in Data:
