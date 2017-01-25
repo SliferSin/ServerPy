@@ -87,7 +87,7 @@ class GetUser(object):
         c = conn.cursor()
         try:
             print("Senosr: "+ str(self.ID_Sensor))
-            c.execute("SELECT Data,X,Y,Z FROM Dades WHERE ID_Sensor = ? and Data BETWEEN '2017/01/18' AND '2017/01/19'",[self.ID_Sensor])#,DataInicial,DataFin])
+            c.execute("SELECT Data,X,Y,Z FROM Dades WHERE ID_Sensor = ? and Data BETWEEN ? AND ?",[self.ID_Sensor,DataInicial,DataFin])
             Data = c.fetchall()
             
             for row in Data:

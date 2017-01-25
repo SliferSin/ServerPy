@@ -68,15 +68,10 @@ def GetFile():
         uDNI = request.args.get('DNI')            
         startDate = request.args.get('Data')
         endDate = request.args.get('Data2')  
-        formStartDate = datetime.strptime(startDate,'%Y-%m-%d')
-        formEndDate = datetime.strptime(endDate,'%Y-%m-%d')  
-        DateStart = "'" +str(formStartDate.date())+ "'"
-        DateEnd = "'" +str(formEndDate.date())+ "'"        
         
-        #sql = "SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ? and d.Data between '2017/01/18' and '2017/01/19'"
         sql = "SELECT u.DNI,u.Nom,u.Cognom,u.Edat,d.ID_Sensor FROM Usuari u, Dades d WHERE u.DNI = ? and d.Data between ? and ?"
-        #c.execute(sql,[uDNI])#,DateStart,DateEnd])
-        c.execute(sql,[uDNI,formStartDate.date(),formEndDate.date()])
+        
+        c.execute(sql,[uDNI,startDate,endDate])
         info_usuari = c.fetchone()
         info = DBClass.GetUser(info_usuari)
         
