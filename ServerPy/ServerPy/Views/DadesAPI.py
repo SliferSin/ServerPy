@@ -19,22 +19,15 @@ def AddDades():
 
     f = open('./ServerPy/download/Entrades.txt','r')
     ID = f.readline()
-    data = f.readline()
-    cont = 0
+    data = datetime.now().date()
     
-    Dades = f.readline().split(',') # Coordenades X,Y,Z
+    Dades = f.readline().split(' ') # Coordenades X,Y,Z
     
-    while len(data) > 1:
-        dataform = datetime.strptime(data.replace('\n',''),'%Y-%m-%d') #Eliminem el '\n'
-        while len(Dades) > 1:  #cont < {num max lectures}      
-            Dades = f.readline().split(',') #Coordenades X,Y,Z
-            cont += 1
-            ZData = Dades[2].replace('\n',' ') #Eliminem el '\n'
-            c.execute("INSERT INTO Dades VALUES (?,?,?,?,?)",[ID,dataform.date(),Dades[0],Dades[1],ZData])           
-            #Dades = f.readline().split(',') #Coordenades X,Y,Z
+    if Dades != ['']:
+        while len(Dades) > 1:
+            c.execute("INSERT INTO Dades VALUES (?,?,?,?,?)",[ID,data,Dades[0],Dades[1],Dades[2]])           
+            Dades = f.readline().split(' ') #Coordenades X,Y,Z
         
-        data = f.readline()
-   
     conn.commit()
     conn.close() 
     f.close()   

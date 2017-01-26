@@ -32,6 +32,10 @@ def Register():
     return render_template('Register.html')
 
 @app.route('/')
+def Enviar():
+    print("redirecting")
+    return redirect(url_for('Connect'))
+
 @app.route('/index')
 def index():
     return render_template('log.html')
